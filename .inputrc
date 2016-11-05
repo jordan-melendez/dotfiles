@@ -1,0 +1,25 @@
+# Inspired by: https://github.com/janmoesen/tilde/blob/master/.inputrc
+
+#
+# Autocompletion
+#
+
+# Make Tab autocompletion case-insensitive (cd ~/dow<Tab> => cd ~/Downloads/)
+set completion-ignore-case On
+
+# When autocompleting symlinks to directories, immediately add a trailing "/"
+set mark-symlinked-directories on
+
+# Do not expand "~" to the home directory when completing. (The actual value passed on to the command still is expanded,
+# though. Which is good.) "Off" is the default value, but some servers override this
+set expand-tilde off
+
+# Be more intelligent when autocompleting by also looking at the text after the cursor. For example, when the current
+# line is "cd ~/src/mozil", and the cursor is on the "z", pressing Tab will not autocomplete it to "cd ~/src/mozillail",
+# but to "cd ~/src/mozilla". (This is supported by the Readline used by Bash 4.)
+set skip-completed-text on
+
+# Allow UTF-8 input and output, instead of showing them like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
