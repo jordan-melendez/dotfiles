@@ -56,7 +56,7 @@ fi
 # Load our dotfiles like ~/.bash_prompt, etc…
 #   ~/.extra can be used for settings you don’t want to commit,
 #   Use it to configure your PATH, thus it being first in line.
-for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
+for file in ~/.{bash_local,bash_prompt,exports,aliases,bash_functions}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
@@ -92,6 +92,8 @@ export PATH="/Users/jordanmelendez/anaconda/bin:$PATH"
 # Added by install_latest_perl_osx.pl
 [ -r /Users/jordanmelendez/.bashrc ] && source /Users/jordanmelendez/.bashrc
 
+
+# Probably makes iterm2 the default terminal or something
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 
