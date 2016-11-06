@@ -54,7 +54,7 @@ fi
 
 
 # Load our dotfiles like ~/.bash_prompt, etc…
-#   ~/.extra can be used for settings you don’t want to commit,
+#   ~/.bash_local can be used for settings you don’t want to commit,
 #   Use it to configure your PATH, thus it being first in line.
 for file in ~/.{bash_local,bash_prompt,exports,aliases,bash_functions}; do
     [ -r "$file" ] && source "$file"
@@ -63,7 +63,7 @@ unset file
 
 # to help sublimelinter etc with finding my PATHS
 case $- in
-   *i*) source ~/.extra
+   *i*) source ~/.bash_local
 esac
 
 # generic colouriser
@@ -104,4 +104,4 @@ export CLICOLOR=1
 export HOMEBREW_INSTALL_BADGE='☕'
 
 # init z https://github.com/rupa/z
-. ~/z/z.sh
+. ~/shell_files/z.sh
