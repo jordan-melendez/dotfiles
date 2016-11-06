@@ -1,0 +1,6 @@
+[user]
+	name = jordan-melendez
+	email = jmelendez1992@gmail.com
+
+[core]
+	editor = subl -n -w
