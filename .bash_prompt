@@ -13,8 +13,8 @@
 
 # User color
 case $(id -u) in
-    0) user_color="$RED" ;;  # root
-    *) user_color="$GREEN" ;;
+    0) user_color="$MAGENTA" ;;  # root
+    *) user_color="$BLUE" ;;
 esac
 
 # Symbols
@@ -44,32 +44,38 @@ function prompt_command() {
 
         # Format Git info
         if [ -n "$dirty" ]; then
-            git_prompt=" $RED$prompt_dirty_symbol$branch$NOCOLOR"
+            git_prompt=" $BOLD$RED$prompt_dirty_symbol$branch$NOCOLOR"
         else
-            git_prompt=" $GREEN$prompt_clean_symbol$branch$NOCOLOR"
+            git_prompt=" $BOLD$GREEN$prompt_clean_symbol$branch$NOCOLOR"
         fi
     fi
 
     # Virtualenv
     local venv_prompt=
     if [ -n "$VIRTUAL_ENV" ]; then
-        venv_prompt=" $BLUE$prompt_venv_symbol$(basename $VIRTUAL_ENV)$NOCOLOR"
+        venv_prompt=" $BOLD$BLUE$prompt_venv_symbol$(basename $VIRTUAL_ENV)$NOCOLOR"
     fi
 
     # Only show username if not default
     local user_prompt=
-    [ "$USER" != "$local_username" ] && user_prompt="$user_color$USER$NOCOLOR"
+    [ "$USER" != "$local_username" ] && user_prompt="$BOLD$user_color$USER$NOCOLOR"
 
     # Show hostname inside SSH session
     local host_prompt=
-    [ -n "$remote" ] && host_prompt="@$YELLOW$HOSTNAME$NOCOLOR"
+    [ -n "$remote" ] && host_prompt="$BOLD@$YELLOW$HOSTNAME$NOCOLOR"
 
     # Show delimiter if user or host visible
+    # local login_delimiter=
+    # [ -n "$user_prompt" ] || [ -n "$host_prompt" ] && login_delimiter=":"
+
+    # Show delimiter if host visible
     local login_delimiter=
-    [ -n "$user_prompt" ] || [ -n "$host_prompt" ] && login_delimiter=":"
+    [ -n "$host_prompt" ] && login_delimiter="$BOLD:"
 
     # Format prompt
-    first_line="$BOLD$user_prompt$host_prompt$login_delimiter$WHITE\w$NOCOLOR$git_prompt$venv_prompt"
+    # first_line="$BOLD$user_prompt$host_prompt$login_delimiter$WHITE\w$NOCOLOR$git_prompt$venv_prompt"
+    first_line="$host_prompt$login_delimiter$BOLD$user_color\w$NOCOLOR$git_prompt$venv_prompt"
+
     # Text (commands) inside \[...\] does not impact line length calculation which fixes stange bug when looking through the history
     # $? is a status of last command, should be processed every time prompt prints
     second_line="\`if [ \$? = 0 ]; then echo \[\$CYAN\]; else echo \[\$RED\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
