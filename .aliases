@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Easier navigation: .., ..., ~ and -
 alias ..="cd .."
 alias cd..="cd .."
@@ -13,8 +15,8 @@ if gls --color > /dev/null 2>&1; then colorflag="--color"; else colorflag="-G"; 
 export CLICOLOR_FORCE=1
 
 # ls options: A = include hidden (but not . or ..), F = put `/` after folders, h = byte unit suffixes
-# alias ls='ls -AFh ${colorflag} --group-directories-first'
-# alias lsd='ls -l | grep "^d"' # only directories
+alias ls='gls -AFh ${colorflag} --group-directories-first'
+alias lsd='gls -l ${colorflag} | grep "^d"' # only directories
 #    `la` defined in .functions
 ###
 

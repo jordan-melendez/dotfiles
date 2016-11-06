@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 # Inspired by: https://github.com/janmoesen/tilde/blob/master/.inputrc
 
 #
@@ -23,3 +25,9 @@ set skip-completed-text on
 set input-meta on
 set output-meta on
 set convert-meta off
+
+# Bells are annoying.
+set bell-style none
+
+# Allow for colors when displaying tab completions
+set colored-stats on
