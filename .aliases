@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Easier navigation: .., ..., ~ and -
 alias ..="cd .."
 alias cd..="cd .."
@@ -14,17 +15,19 @@ alias ~="cd ~" # `cd` is probably faster to type though
 if gls --color > /dev/null 2>&1; then colorflag="--color"; else colorflag="-G"; fi;
 export CLICOLOR_FORCE=1
 
+
 # ls options: A = include hidden (but not . or ..), F = put `/` after folders, h = byte unit suffixes
 alias ls='gls -AFh ${colorflag} --group-directories-first'
 alias lsd='gls -l ${colorflag} | grep "^d"' # only directories
 #    `la` defined in .functions
 ###
 
+
 # `cat` with beautiful colors. requires: sudo easy_install -U Pygments
 alias c='pygmentize -O style=monokai -f console256 -g'
 
 
-# Avoid stupidity
+# Avoid stupidity. This is annoying with recursion (-R) though.
 alias rm="rm -i"
 
 
@@ -32,4 +35,6 @@ alias rm="rm -i"
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
 
+
+# Git command for the bare repo of my dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.myconfig/ --work-tree=$HOME'
