@@ -22,6 +22,8 @@ prompt_symbol="❯"
 prompt_clean_symbol="☀ "
 prompt_dirty_symbol="☂ "
 prompt_venv_symbol="☁ "
+prompt_conda_symbol="⚕ "
+# iterm2_prompt_mark="❯"
 
 function prompt_command() {
     # Local or SSH session?
@@ -56,6 +58,12 @@ function prompt_command() {
         venv_prompt=" $BOLD$BLUE$prompt_venv_symbol$(basename $VIRTUAL_ENV)$NOCOLOR"
     fi
 
+    # Conda env
+    local condaenv_prompt=
+    if [ -n "$CONDA_DEFAULT_ENV" ]; then
+        condaenv_prompt=" $BOLD$GREEN$prompt_conda_symbol$(basename $CONDA_DEFAULT_ENV)$NOCOLOR"
+    fi
+
     # Only show username if not default
     local user_prompt=
     [ "$USER" != "$local_username" ] && user_prompt="$BOLD$user_color$USER$NOCOLOR"
@@ -74,15 +82,21 @@ function prompt_command() {
 
     # Format prompt
     # first_line="$BOLD$user_prompt$host_prompt$login_delimiter$WHITE\w$NOCOLOR$git_prompt$venv_prompt"
-    first_line="$host_prompt$login_delimiter$BOLD$user_color\w$NOCOLOR$git_prompt$venv_prompt"
+    first_line="$host_prompt$login_delimiter$BOLD$user_color\w$NOCOLOR$git_prompt$venv_prompt$condaenv_prompt"
 
     # Text (commands) inside \[...\] does not impact line length calculation which fixes stange bug when looking through the history
     # $? is a status of last command, should be processed every time prompt prints
     second_line="\`if [ \$? = 0 ]; then echo \[\$CYAN\]; else echo \[\$RED\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
+    # second_line="\`if [ \$? = 0 ]; then echo \[\$CYAN\]; else echo \[\$RED\]; fi\`\[$(iterm2_prompt_mark)\]\[\$NOCOLOR\] "
     PS1="\n$first_line\n$second_line"
+    # PS1="\n$first_line \[$CYAN\]\[$(iterm2_prompt_mark)\]\[$NOCOLOR\] "
 
     # Multiline command
-    PS2="\[$CYAN\]$prompt_symbol\[$NOCOLOR\] "
+    # PS2="\[$CYAN\]$prompt_symbol\[$NOCOLOR\] "
+    # PS2="\[$CYAN\]\[$(iterm2_prompt_mark)\]\[$NOCOLOR\] "
+
+    # export PS1
+    # export PS2
 
     # Terminal title
     local title="$(basename "$PWD")"
