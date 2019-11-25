@@ -11,9 +11,8 @@ alias ~="cd ~" # `cd` is probably faster to type though
 # alias -- -="cd -" # The alias is `-`, not `--`
 
 
-# always use color, even when piping (to awk,grep,etc)
-if gls --color > /dev/null 2>&1; then colorflag="--color"; else colorflag="-G"; fi;
-export CLICOLOR_FORCE=1
+# do *not* always use color: no color when piping (to awk,grep,etc)
+if gls --color > /dev/null 2>&1; then colorflag="--color=auto"; else colorflag="-G"; fi;
 
 
 # ls options: A = include hidden (but not . or ..), F = put `/` after folders, h = byte unit suffixes
